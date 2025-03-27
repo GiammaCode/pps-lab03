@@ -27,4 +27,14 @@ class StreamTest:
     val str1 = Stream.iterate(0)(_ + 1) // {0,1,2,3,..}
     val str2 = Stream.takeWhile(str1)(_ < 5) // {0,1,2,3,4}
     assertEquals(Cons(0, Cons(1, Cons(2, Cons(3, Cons(4, Nil()))))), Stream.toList(str2))
+
+  @Test def testFill(): Unit =
+    assertEquals(Cons("a", Cons("a", Nil())), Stream.toList(Stream.fill(2)("a")))
+
+  @Test def testFibonacci(): Unit =
+    val fibonacci: Stream[Int] = Stream.fibonacci(0)(1)
+    print(Stream.toList(Stream.take(fibonacci)(5)))
+    print("\n" + Cons(0,Cons(1,Cons(1,Cons(2,Cons(3,Nil()))))))
+    assertEquals(Cons(0,Cons(1,Cons(1,Cons(2,Cons(3,Nil()))))), Stream.toList(Stream.take(fibonacci)(5)))
+
 end StreamTest
